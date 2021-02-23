@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "jobs",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,14 +8,36 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@ant-design/colors": "^6.0.0",
+    "@ant-design/icons": "^4.5.0",
+    "@prisma/client": "2.16.0",
+    "@reduxjs/toolkit": "^1.5.0",
+    "antd": "^4.12.3",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "formik": "^2.2.6",
+    "formik-antd": "^2.0.1",
+    "moment": "^2.29.1",
     "next": "latest",
+    "next-connect": "^0.10.0",
+    "query-string": "^6.14.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-redux": "^7.2.2",
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
+    "@prisma/cli": "^2.16.0",
+    "@types/axios": "^0.14.0",
     "@types/node": "^12.12.21",
+    "@types/qs": "^6.9.5",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.16",
+    "@types/styled-components": "^5.1.7",
+    "babel-plugin-styled-components": "^1.12.0",
+    "prisma": "2.16.0",
+    "rc-tree-select": "^4.3.0",
     "typescript": "4.0"
   },
   "license": "MIT"
