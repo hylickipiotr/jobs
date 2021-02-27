@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { stringify } from "querystring";
 
 export type PracujScrapperParams = {
@@ -47,7 +47,7 @@ export class PracujScrapper {
   async scrapePage(page?: number): Promise<Pracuj.Resonse | null> {
     const params = stringify({
       ...this.mapPracujParams(this.params),
-      p: page || 1,
+      pn: page || 1,
     });
     const url = `${this.API_URL}?${params}`;
     const response = await axios.get(url);
