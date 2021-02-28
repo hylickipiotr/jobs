@@ -1,4 +1,5 @@
-module.exports = {
+const withWorkers = require("@zeit/next-workers");
+module.exports = withWorkers({
   webpack: (config) => {
     config.module.rules.push({
       test: /\.worker\.js/,
@@ -11,8 +12,8 @@ module.exports = {
       },
     });
 
-    config.output.globalObject = 'typeof self !== "object" ? self : this';
+    config.output.globalObject = `(typeof self !== 'undefined' ? self : this)`;
 
     return config;
   },
-};
+});

@@ -2,13 +2,8 @@ import * as JsStore from "jsstore";
 import { IDataBase } from "jsstore";
 import { offersTable } from "./Offers/offers.table";
 
-const getWorkerPath = () => {
-  if (process.env.NODE_ENV === "development") {
-    return require("file-loader?name=scripts/[name].[hash].js!jsstore/dist/jsstore.worker.js");
-  } else {
-    return require("file-loader?name=scripts/[name].[hash].js!jsstore/dist/jsstore.worker.min.js");
-  }
-};
+const getWorkerPath = () =>
+  require("worker-loader!jsstore/dist/jsstore.worker.js");
 
 const workerPath = getWorkerPath();
 
