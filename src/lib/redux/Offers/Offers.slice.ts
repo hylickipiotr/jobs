@@ -1,7 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getLocalStorageOffer } from "../../../utils/getLocalStorageOffer";
-import { saveLocalStorageOffer } from "../../../utils/saveLocalStorageOffer";
-import { updateLocalStorageOffer } from "../../../utils/updateLocalStorageOffer";
 import { RootState } from "../reducer";
 import { Offer, SearchMeta, SearchState as OffersState } from "./Offers.types";
 
@@ -11,12 +8,6 @@ export const initialState: OffersState = {
   },
   offers: [],
   recommendedOffers: [],
-};
-
-const offerInitValus: Pick<Offer, "isRead" | "isSaved" | "rating"> = {
-  isRead: false,
-  isSaved: false,
-  rating: 0,
 };
 
 export const offersSlice = createSlice({
@@ -29,23 +20,8 @@ export const offersSlice = createSlice({
     clearOffers: (state) => {
       state.offers = [];
     },
-    addOffers: (state, action: PayloadAction<Pracuj.Offer[]>) => {
-      const newOffers: Offer[] = action.payload.map((offer) => {
-        const localOffer = getLocalStorageOffer(offer.commonOfferId);
-        if (localOffer) {
-          return localOffer;
-        }
-
-        const newOffer = {
-          ...offer,
-          ...offerInitValus,
-        };
-        saveLocalStorageOffer(newOffer);
-
-        return newOffer;
-      });
-
-      state.offers = [...state.offers, ...newOffers];
+    addOffers: (state, action: PayloadAction<Offer[]>) => {
+      state.offers = [...state.offers, ...action.payload];
     },
     toggleSave: (state, action: PayloadAction<{ id: string }>) => {
       const newOffers = state.offers.map((offer) => {
@@ -60,15 +36,6 @@ export const offersSlice = createSlice({
       });
 
       state.offers = newOffers;
-
-      updateLocalStorageOffer(action.payload.id, (offer) => {
-        const newOffer: Offer = {
-          ...offer,
-          isSaved: !offer.isSaved,
-        };
-
-        return newOffer;
-      });
     },
   },
 });

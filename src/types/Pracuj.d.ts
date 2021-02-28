@@ -26,7 +26,7 @@ declare module Pracuj {
     offers: RegionOffer[];
     typesOfContract: string[];
     workSchedules: string[];
-    remoteWork: boolean;
+    remoteWork: boolean | string;
   }
 
   export interface OffersCounts {
