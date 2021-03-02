@@ -8,10 +8,9 @@ import React from "react";
 import ReduxProvider from "../lib/redux/provider";
 import "../styles/tailwind.css";
 import "../styles/main.css";
-import { initJsStore } from "../lib/storage-service/idb";
 
 moment.locale("pl");
-initJsStore();
+// initJsStore();
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
