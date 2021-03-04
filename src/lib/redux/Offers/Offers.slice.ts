@@ -3,7 +3,7 @@ import { getLocalStorageOffer } from "../../../utils/getLocalStorageOffer";
 import { saveLocalStorageOffer } from "../../../utils/saveLocalStorageOffer";
 import { updateLocalStorageOffer } from "../../../utils/updateLocalStorageOffer";
 import { RootState } from "../reducer";
-import { Offer, SearchMeta, SearchState as OffersState } from "./Offers.types";
+import { Offer, OffersMeta, OffersState as OffersState } from "./Offers.types";
 
 export const initialState: OffersState = {
   meta: {
@@ -23,7 +23,7 @@ export const offersSlice = createSlice({
   name: "offers",
   initialState,
   reducers: {
-    setMeta: (state, action: PayloadAction<SearchMeta>) => {
+    setMeta: (state, action: PayloadAction<OffersMeta>) => {
       state.meta = action.payload;
     },
     clearOffers: (state) => {
@@ -47,28 +47,26 @@ export const offersSlice = createSlice({
 
       state.offers = [...state.offers, ...newOffers];
     },
-    toggleSave: (state, action: PayloadAction<{ id: string }>) => {
-      const newOffers = state.offers.map((offer) => {
-        if (offer.commonOfferId === action.payload.id) {
-          return {
-            ...offer,
-            isSaved: !offer.isSaved,
-          };
-        }
+    updateOffer: (
+      state,
+      action: PayloadAction<{
+        id: string;
+        index: number;
+        updatedValues: Partial<Offer> | ((offer: Offer) => Partial<Offer>);
+      }>
+    ) => {
+      const { id, index, updatedValues } = action.payload;
+      const currentOffer = state.offers[index];
+      const newOffer = {
+        ...currentOffer,
+        ...(typeof updatedValues === "function"
+          ? updatedValues(currentOffer)
+          : updatedValues),
+      };
 
-        return offer;
-      });
+      state.offers[index] = newOffer;
 
-      state.offers = newOffers;
-
-      updateLocalStorageOffer(action.payload.id, (offer) => {
-        const newOffer: Offer = {
-          ...offer,
-          isSaved: !offer.isSaved,
-        };
-
-        return newOffer;
-      });
+      updateLocalStorageOffer(id, () => newOffer);
     },
   },
 });
@@ -77,7 +75,7 @@ export const {
   setMeta,
   clearOffers,
   addOffers,
-  toggleSave,
+  updateOffer,
 } = offersSlice.actions;
 
 export const selectOffers = (state: RootState) => state.offers.offers;

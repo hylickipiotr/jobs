@@ -1,10 +1,4 @@
-export enum SearchStatus {
-  GETTING_METADATA = "GETTING_METADATA",
-  SCAPING = "SCAPING",
-  COMPLETE = "COMPLETE",
-}
-
-export type SearchMeta = {
+export type OffersMeta = {
   offersTotalCount: number;
 };
 
@@ -13,8 +7,9 @@ export type Offer = Pracuj.Offer & {
   isSaved: boolean;
   rating: number;
 };
-export type SearchState = {
-  meta: SearchMeta;
+
+export type OffersState = {
+  meta: OffersMeta;
   offers: Offer[];
   recommendedOffers: Pracuj.Offer[];
 };

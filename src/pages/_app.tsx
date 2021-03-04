@@ -8,6 +8,8 @@ import React from "react";
 import ReduxProvider from "../lib/redux/provider";
 import "../styles/tailwind.css";
 import "../styles/main.css";
+import OfferDrawer from "../components/OfferDrawer/OfferDrawer";
+import "react-quill/dist/quill.snow.css";
 
 moment.locale("pl");
 
@@ -16,6 +18,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ReduxProvider>
       <ConfigProvider locale={plPL}>
         <Component {...pageProps} />;
+        <OfferDrawer />
       </ConfigProvider>
     </ReduxProvider>
   );

@@ -1,13 +1,17 @@
 import React from "react";
-import JobOfferList from "../components/JobOfferList/JobOfferList";
+import OfferList from "../components/OfferList/OfferList";
 import Layout from "../components/Layout/Layout";
 import Search from "../components/Search/Search";
+import { useSelector } from "react-redux";
+import { selectOffers } from "../lib/redux/Offers/Offers.slice";
 
 const Index: React.FC = () => {
+  const offers = useSelector(selectOffers);
+
   return (
     <Layout title="Jobs - Wyszukiwarka ofert">
       <Search />
-      <JobOfferList />
+      <OfferList offers={offers} />
     </Layout>
   );
 };

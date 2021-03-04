@@ -2,6 +2,7 @@ import React from "react";
 import { Layout as AntLayout } from "antd";
 import Header from "../Header/Header";
 import Head from "next/head";
+import OfferDrawer from "../OfferDrawer/OfferDrawer";
 
 export interface LayoutProps {
   title: string;
@@ -20,6 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
           {children}
         </AntLayout.Content>
       </AntLayout>
+      <OfferDrawer />
     </>
   );
 };
