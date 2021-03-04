@@ -1,9 +1,10 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   clearOffers,
   setMeta,
   addOffers,
 } from "../lib/redux/Offers/Offers.slice";
+import { Offer } from "../lib/redux/Offers/Offers.types";
 import {
   setSearchParams,
   setIsSearching,
@@ -11,6 +12,7 @@ import {
   setTotalPageCount,
 } from "../lib/redux/Search/Search.slice";
 import { SearchParams } from "../lib/redux/Search/Search.types";
+import { OffersService } from "../lib/storage-service/Offers/offers.service";
 import { PracujScrapper } from "../utils/PracujFetch";
 
 export const useSearch = () => {
@@ -20,6 +22,7 @@ export const useSearch = () => {
     dispatch(setSearchParams(values));
     dispatch(setIsSearching(true));
     dispatch(clearOffers());
+    const offersService = new OffersService();
 
     const pracujScrapper = new PracujScrapper({
       params: {
@@ -47,11 +50,32 @@ export const useSearch = () => {
           })
         );
 
-        dispatch(addOffers(offers));
+        offers.forEach((offer) => {
+          const newOffer: Pracuj.Offer = {
+            ...offer,
+            remoteWork:
+              offer.remoteWork === "" || !offer.remoteWork ? false : true,
+          };
+          offersService.addOffer(newOffer);
+        });
       }
     }
 
     dispatch(setIsSearching(false));
+
+    const offers = (await offersService.getOffers({
+      where: {
+        expirationDate: {
+          "<=": new Date(),
+        },
+      },
+      order: {
+        by: "expirationDate",
+        type: "desc",
+      },
+    })) as Offer[];
+
+    dispatch(addOffers(offers));
   };
 
   return { handleSubmit };
