@@ -23,10 +23,10 @@ export const offersTable: ITable = {
       dataType: DATA_TYPE.String,
     },
     lastPublicated: {
-      dataType: DATA_TYPE.String,
+      dataType: DATA_TYPE.DateTime,
     },
     expirationDate: {
-      dataType: DATA_TYPE.String,
+      dataType: DATA_TYPE.DateTime,
     },
     salary: {
       dataType: DATA_TYPE.String,

@@ -14,8 +14,8 @@ declare module Pracuj {
     companyProfileUrl: string;
     companyId: number;
     logo: string;
-    lastPublicated: Date;
-    expirationDate: Date;
+    lastPublicated: string;
+    expirationDate: string;
     salary: string;
     employmentLevel: string;
     jobDescription: string;

@@ -29,17 +29,9 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(defaultPageSize);
 
-  const handleOfferClick = (offer: Offer, index: number) => {
-    dispatch(open({ offer, index }));
-    dispatch(
-      updateOffer({
-        id: offer.commonOfferId,
-        index,
-        updatedValues: {
-          isRead: true,
-        },
-      })
-    );
+  const handleOfferClick = (offer: Offer) => {
+    dispatch(open({ offer }));
+    // If opened for min 5 secords updated isRead to true
   };
 
   const handleStopPropagation = (event: React.MouseEvent) => {
@@ -48,14 +40,14 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
 
   const handleSaveClick = (
     event: React.MouseEvent<HTMLElement, MouseEvent>,
-    id: string,
-    index: number
+    id: string
+    // index: number
   ) => {
     event.stopPropagation();
     dispatch(
       updateOffer({
         id,
-        index,
+        // index,
         updatedValues: (currentOffer) => ({
           isSaved: !currentOffer.isSaved,
         }),
@@ -131,13 +123,13 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
               },
             ])}
             actions={getOfferMeta(offer)}
-            onClick={() => handleOfferClick(offer, offerIndex)}
+            onClick={() => handleOfferClick(offer)}
             extra={
               <Space direction="horizontal" size="middle">
                 <Button
                   shape="circle"
                   type="text"
-                  onClick={(e) => handleSaveClick(e, commonOfferId, offerIndex)}
+                  onClick={(e) => handleSaveClick(e, commonOfferId)}
                 >
                   {isSaved ? (
                     <FlagFilled className="text-blue-5" />

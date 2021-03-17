@@ -5,7 +5,6 @@ import { OfferDrawerState } from "./OfferDrawer.types";
 
 export const initialState: OfferDrawerState = {
   isOpen: false,
-  index: 0,
 };
 
 export const offerDrawerSlice = createSlice({
@@ -14,16 +13,14 @@ export const offerDrawerSlice = createSlice({
   reducers: {
     open: (
       state,
-      action: PayloadAction<Required<Pick<OfferDrawerState, "offer" | "index">>>
+      action: PayloadAction<Required<Pick<OfferDrawerState, "offer">>>
     ) => {
       state.isOpen = true;
       state.offer = action.payload.offer;
-      state.index = action.payload.index;
     },
     close: (state) => {
       state.isOpen = false;
       state.offer = undefined;
-      state.index = 0;
     },
     updateOfferDrawer: (
       state,

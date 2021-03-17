@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { updateLocalStorageOffer } from "../../../utils/updateLocalStorageOffer";
 import { RootState } from "../reducer";
 import { Offer, OffersMeta, OffersState as OffersState } from "./Offers.types";
 
@@ -28,22 +27,18 @@ export const offersSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string;
-        index: number;
         updatedValues: Partial<Offer> | ((offer: Offer) => Partial<Offer>);
       }>
     ) => {
-      const { id, index, updatedValues } = action.payload;
-      const currentOffer = state.offers[index];
-      const newOffer = {
-        ...currentOffer,
-        ...(typeof updatedValues === "function"
-          ? updatedValues(currentOffer)
-          : updatedValues),
-      };
-
-      state.offers[index] = newOffer;
-
-      updateLocalStorageOffer(id, () => newOffer);
+      // const { id, updatedValues } = action.payload;
+      // const newOffer = {
+      //   ...currentOffer,
+      //   ...(typeof updatedValues === "function"
+      //     ? updatedValues(currentOffer)
+      //     : updatedValues),
+      // };
+      // state.offers[index] = newOffer;
+      // // Update offer
     },
   },
 });

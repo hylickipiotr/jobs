@@ -13,6 +13,7 @@ import {
 } from "../lib/redux/Search/Search.slice";
 import { SearchParams } from "../lib/redux/Search/Search.types";
 import { OffersService } from "../lib/storage-service/Offers/offers.service";
+import { formatNewOffer } from "../utils/formatNewOffer";
 import { PracujScrapper } from "../utils/PracujFetch";
 
 export const useSearch = () => {
@@ -38,26 +39,27 @@ export const useSearch = () => {
       dispatch(setTotalPageCount(totalPageCount));
 
       const data = await pracujScrapper.scrapePage(currentPageNumber);
+
       if (data) {
         const { offers, pagination, offersCounts } = data;
 
         totalPageCount = pagination.maxPages;
         currentPageNumber = currentPageNumber + 1;
 
+        /** Updating offers total count */
         dispatch(
           setMeta({
             offersTotalCount: offersCounts.commonOffersTotalCount,
           })
         );
 
-        offers.forEach((offer) => {
-          const newOffer: Pracuj.Offer = {
-            ...offer,
-            remoteWork:
-              offer.remoteWork === "" || !offer.remoteWork ? false : true,
-          };
-          offersService.addOffer(newOffer);
+        const mappedOffers = offers.map((offer) => {
+          const formatedOffer = formatNewOffer(offer);
+          offersService.addOffer(formatedOffer);
+          return formatedOffer;
         });
+
+        dispatch(addOffers(mappedOffers));
       }
     }
 
