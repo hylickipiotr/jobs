@@ -27,6 +27,7 @@ module.exports = {
     "prettier",
     "@typescript-eslint",
     "eslint-plugin-prettier",
+    "unused-imports",
   ],
   rules: {
     "import/extensions": 0,
@@ -43,5 +44,9 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": 0,
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": "error",
   },
 };
