@@ -4,7 +4,7 @@ import cn from "classnames";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open } from "../../lib/redux/OfferDrawer/OfferDrawer.slice";
-import { updateOffer } from "../../lib/redux/Offers/Offers.slice";
+// import { updateOffer } from "../../lib/redux/Offers/Offers.slice";
 import { Offer } from "../../lib/redux/Offers/Offers.types";
 import { selectIsSearching } from "../../lib/redux/Search/Search.slice";
 import { getOfferMeta } from "../../utils/getOfferMeta";
@@ -33,20 +33,20 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
   };
 
   const handleSaveClick = (
-    event: React.MouseEvent<HTMLElement, MouseEvent>,
-    id: string
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+    // id: string
     // index: number
   ) => {
     event.stopPropagation();
-    dispatch(
-      updateOffer({
-        id,
-        // index,
-        updatedValues: (currentOffer) => ({
-          isSaved: !currentOffer.isSaved,
-        }),
-      })
-    );
+    // dispatch(
+    //   updateOffer({
+    //     id,
+    //     // index,
+    //     updatedValues: (currentOffer) => ({
+    //       isSaved: !currentOffer.isSaved,
+    //     }),
+    //   })
+    // );
   };
 
   const handlePaginationChange = (
@@ -115,7 +115,7 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
                 <Button
                   shape="circle"
                   type="text"
-                  onClick={(e) => handleSaveClick(e, commonOfferId)}
+                  onClick={(e) => handleSaveClick(e)}
                 >
                   {isSaved ? (
                     <FlagFilled className="text-blue-5" />

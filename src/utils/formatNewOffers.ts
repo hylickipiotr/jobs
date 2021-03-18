@@ -7,8 +7,6 @@ export const formatNewOffers = (
   const newOffers = offers.map((offer) => {
     const newOffer: Offer = {
       ...offer,
-      expirationDate: new Date(offer.expirationDate),
-      lastPublicated: new Date(offer.lastPublicated),
       remoteWork: !(offer.remoteWork === "" || !offer.remoteWork),
       isRead: false,
       isSaved: false,

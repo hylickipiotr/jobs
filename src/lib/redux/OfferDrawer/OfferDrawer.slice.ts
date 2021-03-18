@@ -49,6 +49,4 @@ export const selectIsOpen = (state: RootState) => state.offerDrawer.isOpen;
 
 export const selectOffer = (state: RootState) => state.offerDrawer.offer;
 
-export const selectIndex = (state: RootState) => state.offerDrawer.index;
-
 export const offerDrawerReducer = offerDrawerSlice.reducer;
