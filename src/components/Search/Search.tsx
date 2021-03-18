@@ -15,7 +15,7 @@ import {
 } from "../../lib/redux/Search/Search.slice";
 import { filterLabelAndValue } from "../../utils/filterLabelAndValue";
 
-const Search: React.FC = ({}) => {
+const Search: React.FC = () => {
   const initSearchParams = useSelector(selectSearchParams);
   const isSearching = useSelector(selectIsSearching);
   const currentPage = useSelector(selectCurrentPageLoading);
@@ -37,7 +37,7 @@ const Search: React.FC = ({}) => {
               treeData={categories}
               placeholder="Jaką kategorią pracy jesteś zainteresownay?"
               treeCheckable
-              showCheckedStrategy={"SHOW_ALL"}
+              showCheckedStrategy="SHOW_ALL"
               filterTreeNode={filterLabelAndValue}
               treeDefaultExpandAll
               allowClear
@@ -53,7 +53,7 @@ const Search: React.FC = ({}) => {
               treeData={regions}
               placeholder="Lokalizacja"
               treeCheckable
-              showCheckedStrategy={"SHOW_ALL"}
+              showCheckedStrategy="SHOW_ALL"
               filterTreeNode={filterLabelAndValue}
               treeDefaultExpandAll
               allowClear

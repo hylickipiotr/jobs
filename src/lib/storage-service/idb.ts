@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import * as JsStore from "jsstore";
 import { IDataBase } from "jsstore";
 import { offersTable } from "./Offers/offers.table";

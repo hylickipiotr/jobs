@@ -1,4 +1,4 @@
-declare module Pracuj {
+declare namespace Pracuj {
   export interface RegionOffer {
     offerId: number;
     offerUrl: string;
@@ -65,7 +65,7 @@ declare module Pracuj {
     childs: Child[];
   }
 
-  export interface Event {}
+  export type Event = unknown;
 
   export interface Page {
     pageNumber: number;

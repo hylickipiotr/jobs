@@ -8,15 +8,13 @@ export interface CompanyLogoProps {
   size?: AvatarSize;
 }
 
-const CompanyLogo: React.FC<CompanyLogoProps> = ({ src, size = "default" }) => {
-  return (
-    <Avatar
-      shape={src ? "square" : "circle"}
-      className={src || "bg-blue-5"}
-      src={src || <ThunderboltFilled className="text-white" />}
-      size={size}
-    />
-  );
-};
+const CompanyLogo: React.FC<CompanyLogoProps> = ({ src, size = "default" }) => (
+  <Avatar
+    shape={src ? "square" : "circle"}
+    className={src || "bg-blue-5"}
+    src={src || <ThunderboltFilled className="text-white" />}
+    size={size}
+  />
+);
 
 export default CompanyLogo;

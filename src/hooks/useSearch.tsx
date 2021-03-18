@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
 import {
+  addOffers,
   clearOffers,
   setMeta,
-  addOffers,
 } from "../lib/redux/Offers/Offers.slice";
 import { Offer } from "../lib/redux/Offers/Offers.types";
 import {
-  setSearchParams,
-  setIsSearching,
   setCurrentPageLoading,
+  setIsSearching,
+  setSearchParams,
   setTotalPageCount,
 } from "../lib/redux/Search/Search.slice";
 import { SearchParams } from "../lib/redux/Search/Search.types";
@@ -38,13 +38,14 @@ export const useSearch = () => {
       dispatch(setCurrentPageLoading(currentPageNumber));
       dispatch(setTotalPageCount(totalPageCount));
 
+      // eslint-disable-next-line no-await-in-loop
       const data = await pracujScrapper.scrapePage(currentPageNumber);
 
       if (data) {
         const { offers, pagination, offersCounts } = data;
 
         totalPageCount = pagination.maxPages;
-        currentPageNumber = currentPageNumber + 1;
+        currentPageNumber += 1;
 
         /** Updating offers total count */
         dispatch(

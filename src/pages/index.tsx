@@ -1,8 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import OfferList from "../components/OfferList/OfferList";
 import Layout from "../components/Layout/Layout";
 import Search from "../components/Search/Search";
-import { useSelector } from "react-redux";
 import { selectOffers } from "../lib/redux/Offers/Offers.slice";
 
 const Index: React.FC = () => {

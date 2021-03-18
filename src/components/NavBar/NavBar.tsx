@@ -1,10 +1,10 @@
 import { Menu } from "antd";
-import React from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
+import React from "react";
 import { menu } from "../../constants/menu";
 
-const NavBar: React.FC = ({}) => {
+const NavBar: React.FC = () => {
   const router = useRouter();
   const currentPage =
     menu.find(({ path }) => path.includes(router.pathname))?.path || "/";

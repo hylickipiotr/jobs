@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../reducer";
-import { Offer, OffersMeta, OffersState as OffersState } from "./Offers.types";
+import { Offer, OffersMeta, OffersState } from "./Offers.types";
 
 export const initialState: OffersState = {
   meta: {

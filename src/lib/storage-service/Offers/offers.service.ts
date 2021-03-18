@@ -1,8 +1,8 @@
+import { SelectQuery } from "jsstore/dist/ts/common/index";
 import { Offer } from "../../redux/Offers/Offers.types";
 import { BaseService } from "../base";
-import { SelectQuery } from "jsstore/dist/ts/common/index";
 
-export type OfferWhere = Record<keyof Offer, any>;
+export type OfferWhere = Record<keyof Offer, unknown>;
 export interface DbOffer
   extends Omit<Offer, "lastPublicated" | "expirationDate"> {
   lastPublicated: Date;
@@ -73,30 +73,36 @@ export class OffersService extends BaseService {
     const formatedOffer = this.formatOffer(offer);
     const duplicated = await this.getOfferById(commonOfferId);
     if (duplicated) {
-      return await this.connection.update({
+      const addedOffer = await this.connection.update({
         in: this.tableName,
         set: formatedOffer,
         where: {
           commonOfferId,
         } as OfferWhere,
       });
+      return addedOffer;
     }
 
-    return await this.connection.insert({
+    const addedOffer = await this.connection.insert({
       into: this.tableName,
       values: [offer],
       return: true,
     });
+
+    return addedOffer;
   }
 
   /** Add bulk offers */
   async addOffers(offers: Offer[]) {
-    return offers.map(async (offer) => await this.addOffer(offer));
+    return offers.map(async (offer) => {
+      const addedOffer = await this.addOffer(offer);
+      return addedOffer;
+    });
   }
 
   /** Remove offer by id */
   async removeOffer(id: string) {
-    return await this.connection.remove({
+    await this.connection.remove({
       from: this.tableName,
       where: {
         commonOfferId: id,
@@ -106,7 +112,7 @@ export class OffersService extends BaseService {
 
   /** Update offer by id */
   async updateOfferById(id: string, updatedData: Offer) {
-    return await this.connection.update({
+    await this.connection.update({
       in: this.tableName,
       set: updatedData,
       where: {

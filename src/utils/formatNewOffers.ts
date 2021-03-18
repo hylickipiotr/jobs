@@ -9,7 +9,7 @@ export const formatNewOffers = (
       ...offer,
       expirationDate: new Date(offer.expirationDate),
       lastPublicated: new Date(offer.lastPublicated),
-      remoteWork: offer.remoteWork === "" || !offer.remoteWork ? false : true,
+      remoteWork: !(offer.remoteWork === "" || !offer.remoteWork),
       isRead: false,
       isSaved: false,
       rating: 0,

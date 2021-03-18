@@ -9,7 +9,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   close,
-  selectIndex,
   selectIsOpen,
   selectOffer,
   updateOfferDrawer,
@@ -22,13 +21,12 @@ const OfferDrawer: React.FC = () => {
 
   const isOpen = useSelector(selectIsOpen);
   const offer = useSelector(selectOffer);
-  const offerIndex = useSelector(selectIndex);
 
   const handleClose = () => {
     dispatch(close());
   };
 
-  const handleSave = (id: string) => {
+  const handleSave = () => {
     dispatch(
       updateOfferDrawer({
         updatedValues: (currentOffer) => ({
@@ -36,16 +34,6 @@ const OfferDrawer: React.FC = () => {
         }),
       })
     );
-
-    // dispatch(
-    //   updateOffer({
-    //     id: offer.commonOfferId,
-    //     index: offerIndex,
-    //     updatedValues: (currentOffer) => ({
-    //       isSaved: !currentOffer.isSaved,
-    //     }),
-    //   })
-    // );
   };
 
   if (!offer) {
@@ -53,9 +41,6 @@ const OfferDrawer: React.FC = () => {
   }
 
   const {
-    commonOfferId,
-    companyProfileUrl,
-
     jobTitle,
     jobDescription,
     offers,
@@ -63,13 +48,6 @@ const OfferDrawer: React.FC = () => {
     logo,
     employer,
 
-    salary,
-    remoteWork,
-    employmentLevel,
-    typesOfContract,
-    workSchedules,
-
-    expirationDate,
     isSaved,
   } = offer;
 
@@ -83,7 +61,7 @@ const OfferDrawer: React.FC = () => {
       title={
         <div className="flex gap-2">
           <Button
-            onClick={() => handleSave(commonOfferId)}
+            onClick={() => handleSave()}
             icon={
               isSaved ? (
                 <FlagFilled className="text-blue-5" />
@@ -95,7 +73,7 @@ const OfferDrawer: React.FC = () => {
             {isSaved ? "Zapisano" : "Zapisz"}
           </Button>
           <Button
-            onClick={() => handleSave(commonOfferId)}
+            onClick={() => handleSave()}
             icon={
               isSaved ? (
                 <DeleteFilled className="text-red-5" />
@@ -121,6 +99,7 @@ const OfferDrawer: React.FC = () => {
                 href={offers[0].offerUrl}
                 target="_blank"
                 className="text-gray-11 hover:text-blue-5 font-medium"
+                rel="noreferrer"
               >
                 {jobTitle}
               </a>

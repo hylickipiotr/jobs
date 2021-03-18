@@ -20,6 +20,7 @@ export type MetaValue =
 export type MetaItem = {
   icon: React.ReactNode;
   value: MetaValue;
+  key: string;
   format?: (value: any) => React.ReactNode;
 };
 
@@ -35,29 +36,35 @@ export const getOfferMeta = (offer: Offer): React.ReactNode[] => {
 
   const items: MetaItem[] = [
     {
+      key: "emplymentLevel",
       icon: <UserOutlined />,
       value: employmentLevel,
     },
     {
+      key: "workSchedules",
       icon: <ClockCircleOutlined />,
       value: workSchedules,
       format: (value: typeof workSchedules) => value.join(" / "),
     },
     {
+      key: "typesOfContract",
       icon: <AuditOutlined />,
       value: typesOfContract,
       format: (value: typeof typesOfContract) => value.join(" / "),
     },
     {
+      key: "salary",
       icon: <MoneyCollectOutlined />,
       value: salary,
     },
     {
+      key: "remoteWork",
       icon: <DesktopOutlined />,
       value: remoteWork,
       format: () => "Mozliwosc pracy zdalnej",
     },
     {
+      key: "expirationDate",
       icon: <CalendarOutlined />,
       value: expirationDate,
       format: (value: Date) => (
@@ -72,7 +79,7 @@ export const getOfferMeta = (offer: Offer): React.ReactNode[] => {
     Array.isArray(value) ? value.length : !!value
   );
 
-  return filteredItems.map(({ icon, value, format }, index) => (
-    <IconText key={index} icon={icon} text={format ? format(value) : value} />
+  return filteredItems.map(({ key, icon, value, format }) => (
+    <IconText key={key} icon={icon} text={format ? format(value) : value} />
   ));
 };

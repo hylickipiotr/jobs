@@ -19,6 +19,7 @@ const paramsSchema: Record<keyof PracujScrapperParams, string> = {
 
 export class PracujScrapper {
   API_URL = "http://localhost:3000/api/praca";
+
   params: PracujScrapperParams = {};
 
   constructor(options?: PracujScrapperOptions) {
@@ -27,7 +28,7 @@ export class PracujScrapper {
     }
   }
 
-  private mapPracujParams(
+  private static mapPracujParams(
     params: PracujScrapperParams
   ): Record<string, URLSearchParams> {
     return Object.keys(params).reduce(
@@ -40,13 +41,13 @@ export class PracujScrapper {
     );
   }
 
-  cacheResponse() {
-    //TODO: Caching respone in localstorage for specific time 5 minutes;
+  static cacheResponse() {
+    // TODO: Caching respone in localstorage for specific time 5 minutes;
   }
 
   async scrapePage(page?: number): Promise<Pracuj.Resonse | null> {
     const params = stringify({
-      ...this.mapPracujParams(this.params),
+      ...PracujScrapper.mapPracujParams(this.params),
       pn: page || 1,
     });
     const url = `${this.API_URL}?${params}`;

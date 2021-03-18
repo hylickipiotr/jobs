@@ -1,5 +1,6 @@
 import { FlagFilled, FlagOutlined } from "@ant-design/icons";
 import { Button, List, Space, Typography } from "antd";
+import cn from "classnames";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { open } from "../../lib/redux/OfferDrawer/OfferDrawer.slice";
@@ -8,7 +9,6 @@ import { Offer } from "../../lib/redux/Offers/Offers.types";
 import { selectIsSearching } from "../../lib/redux/Search/Search.slice";
 import { getOfferMeta } from "../../utils/getOfferMeta";
 import CompanyLogo from "../CompanyLogo/CompanyLogo";
-import cn from "classnames";
 
 export interface OfferListProps {
   offers: Offer[];
@@ -101,18 +101,10 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
           logo,
           employer,
 
-          salary,
-          remoteWork,
-          employmentLevel,
-          typesOfContract,
-          workSchedules,
-
-          expirationDate,
           isSaved,
           isRead,
         } = offer;
 
-        const offerIndex = getOfferIndex(index, currentPage, pageSize);
         return (
           <List.Item
             key={commonOfferId}
@@ -147,6 +139,7 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
                   href={offers[0].offerUrl}
                   target="_blank"
                   onClick={handleStopPropagation}
+                  rel="noreferrer"
                 >
                   {jobTitle}
                 </a>
@@ -156,6 +149,7 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
                   href={companyProfileUrl}
                   target="_blank"
                   onClick={handleStopPropagation}
+                  rel="noreferrer"
                 >
                   <Typography.Text type="secondary">{employer}</Typography.Text>
                 </a>
