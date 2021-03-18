@@ -85,7 +85,7 @@ export class OffersService extends BaseService {
 
     const addedOffer = await this.connection.insert({
       into: this.tableName,
-      values: [offer],
+      values: [formatedOffer],
       return: true,
     });
 
