@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const {
   red,
   volcano,
@@ -11,12 +12,11 @@ const {
   geekblue,
   purple,
   magenta,
-  grey,
 } = require("@ant-design/colors");
 
 module.exports = {
   purge:
-    process.env.node_env === "production"
+    process.env.NODE_ENV === "production"
       ? [
           "./src/pages/**/*.tsx",
           "./src/layout/**/*.tsx",
