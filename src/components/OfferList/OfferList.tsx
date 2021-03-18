@@ -16,12 +16,6 @@ export interface OfferListProps {
 
 const defaultPageSize = 25;
 
-const getOfferIndex = (
-  offerPageIndex: number,
-  currentPage: number,
-  pageSize: number
-) => (currentPage - 1) * pageSize + offerPageIndex;
-
 const OfferList: React.FC<OfferListProps> = ({ offers }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsSearching);
@@ -89,7 +83,7 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
       }}
       loading={isLoading}
       rowKey={({ commonOfferId }) => commonOfferId}
-      renderItem={(offer, index) => {
+      renderItem={(offer) => {
         const {
           commonOfferId,
           companyProfileUrl,

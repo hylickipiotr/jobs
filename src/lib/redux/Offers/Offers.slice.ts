@@ -23,32 +23,27 @@ export const offersSlice = createSlice({
     addOffers: (state, action: PayloadAction<Offer[]>) => {
       state.offers = [...state.offers, ...action.payload];
     },
-    updateOffer: (
-      state,
-      action: PayloadAction<{
-        id: string;
-        updatedValues: Partial<Offer> | ((offer: Offer) => Partial<Offer>);
-      }>
-    ) => {
-      // const { id, updatedValues } = action.payload;
-      // const newOffer = {
-      //   ...currentOffer,
-      //   ...(typeof updatedValues === "function"
-      //     ? updatedValues(currentOffer)
-      //     : updatedValues),
-      // };
-      // state.offers[index] = newOffer;
-      // // Update offer
-    },
+    // updateOffer: (
+    //   state,
+    //   action: PayloadAction<{
+    //     id: string;
+    //     updatedValues: Partial<Offer> | ((offer: Offer) => Partial<Offer>);
+    //   }>
+    // ) => {
+    // const { id, updatedValues } = action.payload;
+    // const newOffer = {
+    //   ...currentOffer,
+    //   ...(typeof updatedValues === "function"
+    //     ? updatedValues(currentOffer)
+    //     : updatedValues),
+    // };
+    // state.offers[index] = newOffer;
+    // // Update offer
+    // },
   },
 });
 
-export const {
-  setMeta,
-  clearOffers,
-  addOffers,
-  updateOffer,
-} = offersSlice.actions;
+export const { setMeta, clearOffers, addOffers } = offersSlice.actions;
 
 export const selectOffers = (state: RootState) => state.offers.offers;
 
