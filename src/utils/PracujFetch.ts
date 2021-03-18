@@ -18,7 +18,7 @@ const paramsSchema: Record<keyof PracujScrapperParams, string> = {
 };
 
 export class PracujScrapper {
-  API_URL = "http://localhost:3000/api/praca";
+  API_URL = "/api/praca";
 
   params: PracujScrapperParams = {};
 
